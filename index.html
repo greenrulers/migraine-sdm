@@ -8,27 +8,27 @@
 :root{
   --bg:#f2efe8; --card:#fffefb; --card2:#e8e3d8; --ink:#1b1a17; --muted:#565046;
   --line:#c9c1b1; --teal:#22355a; --tealbg:#e5e9f1; --rose:#8e2f2c; --rosebg:#f4e4e1;
-  --amber:#8a6410; --amberbg:#f7efd9; --green:#2f6146; --greenbg:#e3ede6;
+  --amber:#8a6410; --amberbg:#f7efd9; --green:#2f6146; --greenbg:#e3ede6; --pale:#cfc7b6;
 }
 @media(prefers-color-scheme:dark){:root{
   --bg:#14130f; --card:#1d1b16; --card2:#26231c; --ink:#ece7dc; --muted:#a79f90;
   --line:#3d382e; --teal:#8fa8d4; --tealbg:#1c2433; --rose:#e0928d; --rosebg:#2e1d1c;
-  --amber:#d8ac5a; --amberbg:#2c2413; --green:#8bc4a5; --greenbg:#17281f;
+  --amber:#d8ac5a; --amberbg:#2c2413; --green:#8bc4a5; --greenbg:#17281f; --pale:#4a463c;
 }}
 :root[data-theme=dark]{
   --bg:#14130f; --card:#1d1b16; --card2:#26231c; --ink:#ece7dc; --muted:#a79f90;
   --line:#3d382e; --teal:#8fa8d4; --tealbg:#1c2433; --rose:#e0928d; --rosebg:#2e1d1c;
-  --amber:#d8ac5a; --amberbg:#2c2413; --green:#8bc4a5; --greenbg:#17281f;
+  --amber:#d8ac5a; --amberbg:#2c2413; --green:#8bc4a5; --greenbg:#17281f; --pale:#4a463c;
 }
 :root[data-theme=light]{
   --bg:#f2efe8; --card:#fffefb; --card2:#e8e3d8; --ink:#1b1a17; --muted:#565046;
   --line:#c9c1b1; --teal:#22355a; --tealbg:#e5e9f1; --rose:#8e2f2c; --rosebg:#f4e4e1;
-  --amber:#8a6410; --amberbg:#f7efd9; --green:#2f6146; --greenbg:#e3ede6;
+  --amber:#8a6410; --amberbg:#f7efd9; --green:#2f6146; --greenbg:#e3ede6; --pale:#cfc7b6;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);line-height:1.75;
  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:960px;margin:0 auto;padding:20px 18px 90px}
+.wrap{max-width:980px;margin:0 auto;padding:20px 18px 90px}
 .bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
  padding:9px 0;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .bar button{font:inherit;font-size:13px;padding:6px 13px;border:1px solid var(--line);
@@ -37,7 +37,10 @@ body{margin:0;background:var(--bg);color:var(--ink);line-height:1.75;
 .bar .st{font-size:12.5px;color:var(--muted);margin-left:auto}
 h1{font-size:clamp(19px,3.4vw,26px);margin:8px 0 4px;line-height:1.4;text-wrap:balance}
 .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
-h2{font-size:18px;margin:30px 0 8px;padding-left:11px;border-left:5px solid var(--teal)}
+h2{font-size:18px;margin:32px 0 8px;padding-left:11px;border-left:5px solid var(--teal)}
+h2.step{background:var(--teal);color:#fff;border-left:none;padding:7px 13px;border-radius:8px}
+:root[data-theme=dark] h2.step{color:#14130f}
+@media(prefers-color-scheme:dark){h2.step{color:#14130f}}
 h3{font-size:15px;margin:18px 0 6px;color:var(--teal)}
 p,li,td,th{font-size:14.6px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 17px;margin:11px 0}
@@ -56,32 +59,37 @@ th{background:var(--card2);font-weight:700;font-size:13px}
 input[type=text],input[type=number],textarea{font:inherit;font-size:14px;width:100%;
  padding:6px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink)}
 textarea{min-height:62px;resize:vertical}
-label.opt{display:inline-flex;align-items:center;gap:5px;margin-right:14px;cursor:pointer}
-.scale{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:5px 0}
-.scale label{display:flex;flex-direction:column;align-items:center;font-size:11.5px;
- color:var(--muted);cursor:pointer;min-width:34px}
-.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:11px;align-items:center;margin:9px 0}
-.vs .l,.vs .r{font-size:13.4px}
-.vs .r{text-align:right}
-@media(max-width:640px){.vs{grid-template-columns:1fr}.vs .r{text-align:left}}
-.big{font-size:26px;font-weight:800;color:var(--teal);line-height:1.25}
-.grid100{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;max-width:340px;margin:7px 0}
-.grid100 i{aspect-ratio:1;border-radius:2px;background:var(--card2)}
-.grid100 i.a{background:var(--teal)}
-.grid100 i.b{background:var(--green)}
-.lgd{font-size:12.4px;color:var(--muted);margin:3px 0 0}
+label.opt{display:inline-flex;align-items:flex-start;gap:5px;margin:0 14px 5px 0;cursor:pointer}
+.ia{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}
+.iabox{flex:1 1 300px;min-width:280px}
+.iahead{font-size:13.6px;font-weight:700;margin:0 0 5px}
+.iagrid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:260px}
+.iagrid svg{width:100%;height:auto;display:block}
+.ialgd{font-size:12.4px;color:var(--muted);margin:6px 0 0;line-height:1.65}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+.bal{width:100%;border-collapse:collapse;font-size:13.4px;margin:8px 0}
+.bal th,.bal td{border:1px solid var(--line);padding:6px 7px;vertical-align:middle}
+.bal th{background:var(--card2);text-align:center;font-size:12.4px}
+.bal td.n{text-align:center;width:34px;padding:4px 2px}
+.bal td.n label{display:block;cursor:pointer;font-size:12.6px;color:var(--muted)}
+.bal td.n input{margin:0 0 1px}
 footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
  font-size:12.4px;color:var(--muted)}
 .pg{font-size:12px;color:var(--muted);text-align:right;margin-top:26px;
  padding-top:7px;border-top:1px dashed var(--line)}
+ol.ref li{font-size:12.6px;color:var(--muted);margin:4px 0}
 @media print{
   .bar{display:none} body{background:#fff}
-  .card,table{break-inside:avoid} h2{break-after:avoid}
+  .card,table,.ia{break-inside:avoid} h2{break-after:avoid}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pp" viewBox="0 0 20 26">
+<circle cx="10" cy="5.4" r="4.4"/><path d="M10 11.4c-5 0-8 3-8 7.2V26h16v-7.4c0-4.2-3-7.2-8-7.2z"/>
+</symbol></svg>
+
 <div class="wrap">
 
 <div class="bar">
@@ -96,13 +104,20 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 
 <div class="card amber">
 <h3 style="margin-top:0">這張表要怎麼用</h3>
-<p style="margin:0 0 7px">這張表是<b>您和醫療人員一起填</b>的。每一格後面的標記告訴您這格由誰填：</p>
+<p style="margin:0 0 7px">這張表是<b>您和醫療人員一起填</b>的。每一格的標記告訴您這格由誰填：</p>
 <p style="margin:0 0 5px"><span class="tag tagDoc">請由醫療人員填寫</span>　這些是<b>醫師的判斷</b>（診斷、分級、風險評估）。填錯會影響治療決定，<b>請不要自己勾</b>。</p>
 <p style="margin:0 0 7px"><span class="tag tagMe">由您自己填寫</span>　這些是<b>只有您自己知道的事</b>，還有您的感受和想法。這部分沒有標準答案。</p>
-<p style="margin:0;color:var(--muted);font-size:13.4px">您填的內容<b>只會存在您這台裝置裡</b>，不會傳送到任何地方。按「列印／存成 PDF」可以印出來帶走，按「清空重填」會全部清掉。</p>
+<p style="margin:0;color:var(--muted);font-size:13.4px">您填的內容<b>只會存在您這台裝置裡</b>，不會傳送到任何地方。按「列印／存成 PDF」可以印出來帶走。</p>
 </div>
 
-<h2>一、這張表適合誰</h2>
+<h2>【前言】</h2>
+<div class="card">
+<p style="margin:0 0 7px">偏頭痛發作起來不只是「頭很痛」。當每個月發作超過八天、而且已經試過好幾種預防藥都沒效或受不了副作用時，工作、家庭和生活品質都會受到很大影響。<b>更要注意的是：如果止痛藥吃的天數太多，反而會讓頭痛變得更頻繁</b>，形成惡性循環。</p>
+<p style="margin:0 0 7px"><b>CGRP 標靶藥</b>是比較新的一類預防藥。研究顯示它<b>可以讓一部分人的頭痛天數減少一半以上，但不是每個人都有效</b>，而且費用比一般口服藥高很多。<b>不用這類藥，也是一個正當的選擇</b> —— 這張表會把「用」和「不用」兩邊的好處與壞處都告訴您。</p>
+<p style="margin:0"><b>每個人的狀況、在意的事情、和能負擔的費用都不一樣，所以沒有一個標準答案。</b>請您和醫療人員一起，依照您自己的情況做決定。過程中有任何問題，都可以隨時提出。</p>
+</div>
+
+<h2>【適用對象】</h2>
 <div class="card">
 <p style="margin:0 0 6px">經醫師診斷為<b>偏頭痛</b>，且同時符合以下兩點的成年人：</p>
 <ul style="margin:0">
@@ -111,20 +126,20 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 </ul>
 </div>
 
-<h2>二、您目前的狀況</h2>
+<h3>您目前的狀況</h3>
 <div class="scroll"><table>
-<thead><tr><th style="width:32%">項目</th><th>您的狀況</th><th style="width:20%">由誰填寫</th></tr></thead>
+<thead><tr><th style="width:32%">項目</th><th>您的狀況</th><th style="width:19%">由誰填寫</th></tr></thead>
 <tbody>
 <tr><td>偏頭痛的診斷與分類</td>
  <td><label class="opt"><input type="radio" name="dx" value="hfem" data-s>高頻陣發性</label>
      <label class="opt"><input type="radio" name="dx" value="cm" data-s>慢性</label></td>
  <td><span class="tag tagDoc">醫療人員</span></td></tr>
 <tr><td>失能分級（MIDAS）<br><span style="color:var(--muted);font-size:12.6px">評估最近 3 個月因頭痛損失的生產力</span></td>
- <td><input type="number" placeholder="分數" data-s style="max-width:120px"> 分　→　分級
-     <input type="text" placeholder="無／輕度／中度／重度" data-s style="max-width:190px"></td>
+ <td><input type="number" placeholder="分數" data-s style="max-width:110px"> 分　→　分級
+     <input type="text" placeholder="無／輕度／中度／重度" data-s style="max-width:180px"></td>
  <td><span class="tag tagDoc">醫療人員</span></td></tr>
 <tr><td>頭痛影響問卷（HIT-6）</td>
- <td><input type="number" placeholder="分數" data-s style="max-width:120px"> 分</td>
+ <td><input type="number" placeholder="分數" data-s style="max-width:110px"> 分</td>
  <td><span class="tag tagDoc">醫療人員</span></td></tr>
 <tr><td>是否合併「藥物過度使用頭痛」<br><span style="color:var(--muted);font-size:12.6px">止痛藥吃太多天，反而讓頭痛變多</span></td>
  <td><label class="opt"><input type="radio" name="moh" value="y" data-s>是</label>
@@ -138,10 +153,10 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
      <label class="opt"><input type="radio" name="nhi" value="n" data-s>不符合，要自費</label></td>
  <td><span class="tag tagDoc">醫療人員</span></td></tr>
 <tr><td>每個月偏頭痛發作幾天</td>
- <td><input type="number" placeholder="天" data-s style="max-width:120px"> 天　<span style="color:var(--muted);font-size:12.6px">請看頭痛日誌</span></td>
+ <td><input type="number" placeholder="天" data-s style="max-width:110px"> 天　<span style="color:var(--muted);font-size:12.6px">請看頭痛日誌</span></td>
  <td><span class="tag tagMe">您自己</span></td></tr>
 <tr><td>每個月吃幾天止痛藥</td>
- <td><input type="number" placeholder="天" data-s style="max-width:120px"> 天　<span style="color:var(--muted);font-size:12.6px">含止痛藥與偏頭痛急性藥</span></td>
+ <td><input type="number" placeholder="天" data-s style="max-width:110px"> 天　<span style="color:var(--muted);font-size:12.6px">含止痛藥與偏頭痛急性藥</span></td>
  <td><span class="tag tagMe">您自己</span></td></tr>
 <tr><td>已經試過哪些預防藥？為什麼停掉？</td>
  <td><textarea placeholder="例如：propranolol —— 誘發氣喘；topiramate —— 思考變慢；amitriptyline —— 白天想睡" data-s></textarea></td>
@@ -154,47 +169,45 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 <p style="margin:7px 0 0;color:var(--muted);font-size:13.2px">MIDAS 參考：0–5 分幾乎不影響生活；6–10 分輕度；11–20 分中度；<b>21 分以上重度</b>。HIT-6 參考：≤49 無或輕微；50–55 有些；56–59 顯著；<b>≥60 嚴重</b>。分數雖然可以自己算，但<b>判讀與臨床意義仍由醫師說明</b>。</p>
 </div>
 
-<p class="pg">第 1 頁／共 7 頁</p>
+<p class="pg">第 1 頁／共 8 頁</p>
 
-<h2>三、健保為什麼不給付？</h2>
+<h2>【疾病介紹】為什麼會走到今天這一步</h2>
 <div class="card">
-<p style="margin:0 0 8px">CGRP 標靶藥的健保給付要<b>同時</b>符合三項條件：</p>
-<div class="scroll"><table>
-<thead><tr><th style="width:56%">健保條件</th><th>常見情況</th></tr></thead>
-<tbody>
-<tr><td>① 難治型「<b>慢性</b>」偏頭痛</td><td>若您是<b>陣發性</b> → 不符合</td></tr>
-<tr><td>② 每月頭痛 <b>≥ 15 天</b></td><td>若您是 10–12 天 → 不符合</td></tr>
-<tr><td>③ 曾用 <b>≥ 3 種</b>預防藥無效</td><td>三種都因副作用停用 → 符合</td></tr>
-</tbody></table></div>
-<p style="margin:8px 0 0"><b>三項沒有同時成立，就需要全額自費。</b>這不是「選擇要自費」，是<b>沒有給付可以用</b>。請醫療人員在上一頁替您確認。</p>
+<p style="margin:0 0 7px">偏頭痛發作時，大腦裡一條叫做<b>三叉神經血管</b>的神經被活化，會釋放一種叫做 <b>CGRP</b> 的物質，讓血管擴張、發炎、痛覺被放大。這就是為什麼偏頭痛不只是痛，還常常伴隨想吐、怕光、怕吵。</p>
+<p style="margin:0 0 7px"><b>傳統的口服預防藥</b>（例如乙型阻斷劑、抗癲癇藥、三環抗鬱劑）原本不是為偏頭痛設計的，是後來發現「順便有效」，所以<b>副作用也比較廣</b> —— 誘發氣喘、思考變慢、白天想睡，都是常見的停藥原因。</p>
+<p style="margin:0"><b>接下來會發生什麼：</b>預防藥沒效 → 只好更常吃止痛藥 → 止痛藥吃到每個月超過一定天數 → <b>身體對痛的門檻降低，頭痛反而更頻繁</b>（這叫「藥物過度使用頭痛」）→ 再吃更多止痛藥。<b>這個循環如果不打斷，陣發性偏頭痛可能會演變成慢性偏頭痛。</b></p>
 </div>
 
-<h2>四、有哪些選擇</h2>
+<h2>【醫療選項介紹】</h2>
 <div class="scroll"><table>
-<thead><tr><th style="width:20%">選擇</th><th style="width:26%">怎麼用</th><th>重點</th></tr></thead>
+<thead><tr><th style="width:19%">選項</th><th style="width:25%">怎麼做</th><th>好處</th><th>壞處</th></tr></thead>
 <tbody>
-<tr><td><b>A. CGRP 標靶藥</b><br><span style="color:var(--muted);font-size:12.6px">針劑或口服</span></td>
+<tr><td><b>A. CGRP 標靶藥</b><br><span style="color:var(--muted);font-size:12.4px">針劑或口服</span></td>
  <td>打針每月或每 3 個月一次；口服每天或隔天一顆</td>
- <td>比較新的一類預防藥，<b>專門擋住偏頭痛的 CGRP 這條路徑</b>。可以讓一部分人的頭痛天數減少一半以上，<b>但不是每個人都有效</b>，而且要自費。</td></tr>
+ <td>專門擋住偏頭痛的 CGRP 這條路徑，<b>不是「順便有效」的藥</b>。可以讓一部分人頭痛天數減少一半以上。</td>
+ <td><b>輕微而常見</b>：打針處紅、腫、痛；口服可能噁心、便祕、想睡。<br><b>嚴重但罕見</b>：血壓上升（若本來就有高血壓要告知醫師）。<br><b>發生了怎麼辦</b>：多數會自行緩解；若持續或加重，回診評估是否調整或停藥。<br><b>費用</b>：不符給付時需全額自費。</td></tr>
 <tr><td><b>B. 再換一種<br>傳統口服預防藥</b></td>
  <td>每天口服，健保給付</td>
- <td>財務負擔最低。但若已經失敗多種，再換的成功機會下降；部分藥物對<b>有生育計畫的女性不適合</b>，需要醫師評估。</td></tr>
+ <td>財務負擔最低，取得方便。</td>
+ <td>若已失敗多種，再換的成功機會下降。部分藥物<b>對有生育計畫的女性不適合</b>，需要醫師評估。</td></tr>
 <tr><td><b>C. 非藥物輔助</b></td>
- <td>正念、放鬆訓練、認知行為治療、生物回饋等</td>
- <td><b>定位是輔助，不是替代。</b>可以幫助紓解壓力、改善生活品質，但<b>單獨使用無法控制重度發作</b>。</td></tr>
-<tr><td><b>D. 維持現狀</b></td>
+ <td>正念、放鬆訓練、認知行為治療、生物回饋、規律作息</td>
+ <td>沒有藥物交互作用，對睡眠與壓力也有幫助。<b>和藥物一起做效果最好。</b></td>
+ <td><b>單獨使用無法控制重度發作</b>，定位是輔助不是替代。需要持續練習，停了效果會消退。多數項目在本院為自費。</td></tr>
+<tr><td><b>D. 維持現狀<br>（不做）</b></td>
  <td>繼續只用急性止痛藥</td>
- <td>不用多花錢。但若止痛藥使用天數已達藥物過度使用頭痛標準，<b>繼續下去會讓頭痛更容易慢性化</b>。</td></tr>
+ <td>不用多花錢，也不用適應新藥。</td>
+ <td>若止痛藥天數已達藥物過度使用頭痛標準，<b>繼續下去頭痛更容易變成慢性</b>。失能與生產力的損失會持續累積。</td></tr>
 </tbody></table></div>
 
-<p class="pg">第 2 頁／共 7 頁</p>
+<p class="pg">第 2 頁／共 8 頁</p>
 
-<h2>五、如果選 A：本院有哪幾種？費用多少？</h2>
+<h2>如果選 A：本院有哪幾種？費用多少？</h2>
 <div class="card amber">
 <p style="margin:0"><b>三個月是我們一起評估效果的時間點</b>，所以請您先看「先用 3 個月要準備多少錢」這一欄 —— 那才是您這次<b>實際要先拿出來的錢</b>。</p>
 </div>
 <div class="scroll"><table>
-<thead><tr><th style="width:24%">藥品</th><th style="width:11%">劑型</th><th style="width:25%">怎麼用</th><th style="width:16%">每個月</th><th>★ 先用 3 個月，總共</th></tr></thead>
+<thead><tr><th style="width:23%">藥品</th><th style="width:11%">劑型</th><th style="width:25%">怎麼用</th><th style="width:16%">每個月</th><th>★ 先用 3 個月，總共</th></tr></thead>
 <tbody>
 <tr><td><b>恩疼停</b> Emgality<br><span style="color:var(--muted);font-size:12.4px">Galcanezumab</span></td>
  <td>皮下針劑</td><td>第一次 240 mg，之後每月 120 mg</td>
@@ -214,50 +227,289 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 <b>★ 恩疼停第一次要打 240 mg（是之後每個月的兩倍劑量）</b>，請在門診<b>向醫療人員確認第一個月的實際收費方式</b>，以免準備的金額不夠。</p>
 
 <div class="card teal">
-<h3 style="margin-top:0">打針和吃藥，怎麼選？</h3>
-<p style="margin:0 0 5px"><b>這一題不是在問要不要用藥</b>，而是您比較能接受哪一種方式。兩類都是擋 CGRP 這條路徑，只是給法不一樣。</p>
-<ul style="margin:0">
-<li><b>針劑</b>：一個月打一次；<b>艾久維還可以選每 3 個月打一次</b>，一年只要 4 次，請假與交通次數最少。缺點是要打針。</li>
-<li><b>口服</b>：不用打針、不用回診施打。缺點是<b>每天（或隔天）都要記得吃</b>，而且本院口服的月費較高。</li>
-</ul>
+<h3 style="margin-top:0">健保為什麼不給付？</h3>
+<p style="margin:0 0 6px">CGRP 標靶藥的健保給付要<b>同時</b>符合三項：<b>①</b> 難治型「<b>慢性</b>」偏頭痛　<b>②</b> 每月頭痛 <b>≥ 15 天</b>　<b>③</b> 曾用 <b>≥ 3 種</b>預防藥無效。</p>
+<p style="margin:0"><b>三項沒有同時成立，就需要全額自費。</b>這不是「選擇要自費」，是<b>沒有給付可以用</b>。請醫療人員在第 1 頁替您確認。</p>
 </div>
 
-<p class="pg">第 3 頁／共 7 頁</p>
+<p class="pg">第 3 頁／共 8 頁</p>
 
-<h2>六、CGRP 標靶藥的效果有多大？</h2>
+<h2>【初步意向欄】</h2>
 <div class="card green">
-<p style="margin:0 0 4px;font-size:13.6px;color:var(--muted)">在<b>和您情況相似</b>（先前預防藥失敗、且合併藥物過度使用頭痛）的人身上：</p>
-<p class="big" style="margin:2px 0 2px">每 100 人裡，頭痛天數減少一半以上的<br>從 <span style="color:var(--rose)">12 人</span> 增加到 <span style="color:var(--green)">39 人</span></p>
-<div class="grid100" id="g100"></div>
-<p class="lgd">■ 深藍 12 格＝<b>不用這個藥也會改善</b>的人　■ 綠色 27 格＝<b>因為用了藥才多得到改善</b>的人　■ 淺色 61 格＝<b>用了藥仍沒有明顯改善</b>的人</p>
-<p style="margin:8px 0 0"><b>換句話說：大約每 4 位用藥的人，就有 1 位是因為這個藥才多得到改善。</b>但另一面也要一起看 —— 100 人裡有 61 人用了也沒有明顯改善。</p>
-<p style="margin:6px 0 0">在頭痛天數上，平均<b>每個月比不用藥多減少 3.1 天</b>。</p>
-<p style="margin:6px 0 0;color:var(--muted);font-size:13.2px">證據等級：<b>高</b>（研究族群與您的情況完全對應，三項研究結果方向一致）。</p>
+<p style="margin:0 0 7px"><b>在往下看四個步驟之前，先記錄您現在的想法。</b>不用有壓力，這只是一個起點；走完四個步驟後我們會再問一次，看看有沒有改變。　<span class="tag tagMe">由您自己填寫</span></p>
+<p style="margin:0">
+<label class="opt"><input type="radio" name="pre" value="a" data-s>我傾向<b>使用</b> CGRP 標靶藥</label>
+<label class="opt"><input type="radio" name="pre" value="b" data-s>我傾向<b>不使用</b>，維持現在的方式</label>
+<label class="opt"><input type="radio" name="pre" value="c" data-s><b>我還不清楚</b></label></p>
 </div>
 
-<h2>七、可能的壞處與不確定</h2>
-<div class="card rose">
-<ul style="margin:0">
-<li><b>因副作用而停藥的比例，和用安慰劑的人沒有看出明顯差別</b> —— 但這一點的<b>證據確定性只有低到極低</b>。<b>「沒看出差別」不等於「沒有差別」</b>，這一點我們必須先跟您說清楚。</li>
-<li><b>打針</b>：注射部位可能紅、腫、痛。</li>
-<li><b>口服</b>：可能噁心、便祕、想睡。</li>
-<li>另有藥物警戒通報提到血壓上升、便祕等訊號，但屬於<b>觀察性的通報資料</b>，證據等級低，目前不足以改變建議 —— 不過如果您本來就有<b>便祕體質或血壓問題</b>，請一定要主動告訴醫師。</li>
-</ul>
+<p style="margin:16px 0 0;text-align:center;color:var(--muted)">接下來，請透過以下四個步驟來幫助您做決定</p>
+
+<h2 class="step">步驟一、選項的比較</h2>
+<div class="scroll"><table>
+<thead><tr><th style="width:14%"></th><th style="width:43%">〔選項 A〕使用 CGRP 標靶藥</th><th>〔選項 D〕維持現狀，不使用</th></tr></thead>
+<tbody>
+<tr><td><b>需要做的事</b></td>
+ <td>1. 每月打一針，或每 3 個月一針；口服則每天／隔天一顆<br>
+     2. 記錄頭痛日誌<br>
+     3. <b>3 個月後回診一起評估效果</b><br>
+     ※ 即使開始用這個藥，您仍需要<b>減少急性止痛藥的使用天數</b></td>
+ <td>1. 繼續使用急性止痛藥<br>
+     2. 記錄頭痛日誌<br>
+     ※ 仍需要<b>減少急性止痛藥的使用天數</b>，否則頭痛可能更頻繁</td></tr>
+<tr><td><b>好處</b></td>
+ <td>1. 每 100 人中約有 <b>39 人</b>頭痛天數減少一半以上<br>
+     2. 每月偏頭痛天數平均<b>多減少 3.1 天</b><br>
+     3. 專一擋住 CGRP 路徑，<b>耐受性不比傳統口服藥差</b></td>
+ <td>1. <b>不用額外花錢</b><br>
+     2. 不用適應新藥、不用打針<br>
+     3. 不會有新藥可能帶來的不舒服</td></tr>
+<tr><td><b>風險</b></td>
+ <td>1. 每 100 人中約有 <b>61 人</b>用了仍<b>沒有明顯改善</b><br>
+     2. 打針處可能紅腫痛；口服可能噁心、便祕、想睡<br>
+     3. <b>全額自費</b>，3 個月要先準備 34,182–56,250 元</td>
+ <td>1. 每 100 人中只有 <b>12 人</b>會自然改善到頭痛減半<br>
+     2. 止痛藥天數若持續偏高，<b>頭痛更容易變成慢性</b><br>
+     3. 失能與工作損失會持續累積</td></tr>
+</tbody></table></div>
+
+<h3>數字圖示　每 100 人中，頭痛天數減少一半以上的人數</h3>
+<div class="ia">
+  <div class="iabox">
+    <p class="iahead" style="color:var(--green)">〔選項 A〕使用 CGRP 標靶藥</p>
+    <div class="iagrid" id="iaA" role="img" aria-label="每 100 人中 39 人">
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--green)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
 </div>
-
-<p class="pg">第 4 頁／共 7 頁</p>
-
-<h2>八、止痛藥吃太多天，要先戒掉才能開始嗎？</h2>
+    <p class="ialgd"><span class="sw" style="background:var(--green)"></span><b>39 人</b>　頭痛天數減少一半以上<br>
+    <span class="sw" style="background:var(--pale)"></span>61 人　沒有明顯改善</p>
+  </div>
+  <div class="iabox">
+    <p class="iahead" style="color:var(--rose)">〔選項 D〕維持現狀，不使用</p>
+    <div class="iagrid" id="iaD" role="img" aria-label="每 100 人中 12 人">
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--rose)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+<svg viewBox="0 0 20 26" fill="var(--pale)"><use href="#pp"/></svg>
+</div>
+    <p class="ialgd"><span class="sw" style="background:var(--rose)"></span><b>12 人</b>　頭痛天數減少一半以上<br>
+    <span class="sw" style="background:var(--pale)"></span>88 人　沒有明顯改善</p>
+  </div>
+</div>
 <div class="card teal">
-<p style="margin:0 0 6px"><b>不需要。</b>如果您每個月吃止痛藥的天數已經達到「藥物過度使用頭痛」的標準，這一項<b>一定要處理</b>，但<b>不必等到成功減藥之後才能開始預防治療</b> —— 兩件事<b>可以同時進行</b>。</p>
-<p style="margin:0">實務上會這樣安排：一邊開始預防治療，一邊<b>記錄頭痛日誌</b>、逐步把急性止痛藥的使用天數降下來。預防治療有效之後，往往會比較容易減少止痛藥。</p>
+<p style="margin:0"><b>兩張圖用同一個分母（每 100 人）與同一個尺度，可以直接比較。</b>差別是 <b>39 減 12 ＝ 27 人</b> —— 也就是說，<b>每 100 個人使用，大約有 27 個人是「因為用了藥」才多得到改善</b>；換算下來<b>大約每 4 位使用者就有 1 位</b>。<br>
+另外那 12 人，<b>就算不用藥也會改善</b>；而 61 人用了也沒有明顯改善。<b>這三種情況都要一起看，才是完整的圖像。</b></p>
+</div>
+<p style="margin:5px 0 0;color:var(--muted);font-size:12.6px">數字來源：針對「先前至少 2 種口服預防藥失敗、且試驗允許藥物過度使用頭痛」族群合併之 3 項隨機對照試驗（1,727 人）。證據等級：<b>高</b>。</p>
+
+<p class="pg">第 4 頁／共 8 頁</p>
+
+<h2>其他您可能想知道的事</h2>
+<div class="card teal">
+<h3 style="margin-top:0">止痛藥吃太多天，要先戒掉才能開始嗎？</h3>
+<p style="margin:0 0 6px"><b>不需要。</b>如果您每個月吃止痛藥的天數已達「藥物過度使用頭痛」標準，這一項<b>一定要處理</b>，但<b>不必等到成功減藥之後才能開始預防治療</b> —— 兩件事<b>可以同時進行</b>。</p>
+<p style="margin:0">實務上會這樣安排：一邊開始預防治療，一邊記錄頭痛日誌、逐步把急性止痛藥的天數降下來。<b>預防治療有效之後，往往會比較容易減少止痛藥。</b></p>
 </div>
 
-<h2>九、非藥物的方法有用嗎？</h2>
 <div class="card">
+<h3 style="margin-top:0">非藥物的方法有用嗎？</h3>
 <p style="margin:0 0 7px">有幫助，但<b>定位是輔助，不是替代</b>。研究裡效果最清楚的是<b>「藥物 ＋ 行為治療」一起做</b>：單獨用藥或單獨做行為治療，都沒有併用來得好。</p>
 <div class="scroll"><table>
-<thead><tr><th style="width:26%">方法</th><th>目前研究怎麼說</th></tr></thead>
+<thead><tr><th style="width:24%">方法</th><th>目前研究怎麼說</th></tr></thead>
 <tbody>
 <tr><td><b>正念／正念減壓</b></td><td>在慢性偏頭痛合併止痛藥過度使用的病人身上，一年後達到頭痛減半的比例明顯較高。但研究族群是慢性偏頭痛，不完全等同您的情況。</td></tr>
 <tr><td><b>認知行為治療</b></td><td>每個月大約少 1 天頭痛。但<b>追蹤 4 到 11 個月後效果會消失</b>，需要持續練習。</td></tr>
@@ -268,8 +520,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 <p style="margin:7px 0 0;color:var(--muted);font-size:13.2px">非藥物方法在本院多為自費，費用依院內收費標準；部分項目需轉介。請與醫療人員確認。</p>
 </div>
 
-<h2>十、關於「明明說是安慰劑，卻還是有效」</h2>
 <div class="card amber">
+<h3 style="margin-top:0">關於「明明說是安慰劑，卻還是有效」</h3>
 <p style="margin:0 0 6px">這是一個很好的問題。網路上流傳的說法多半來自<b>2014 年一篇研究</b>，但那篇<b>並不是真正的「公開安慰劑」試驗</b> —— 它的設計裡有<b>刻意貼錯的標籤</b>；而且用「兩個半小時完全不痛」這個標準來看，<b>和完全不治療沒有差別</b>。</p>
 <p style="margin:0 0 6px">真正的公開安慰劑試驗<b>2025 年才發表</b>：120 位偏頭痛病人，明白告知是安慰劑、每天吃兩次、連續三個月。結果是 ——</p>
 <ul style="margin:0 0 6px">
@@ -281,77 +533,91 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 <p style="margin:0"><b>所以：公開安慰劑改變的是主觀的負擔感受，不是頭痛發作本身。</b>對於您最想解決的「頭痛天數」和「止痛藥吃太多天」，目前<b>沒有證據支持</b>用它來取代預防治療。</p>
 </div>
 
-<p class="pg">第 5 頁／共 7 頁</p>
+<p class="pg">第 5 頁／共 8 頁</p>
 
-<h2>十一、您怎麼想？（價值觀釐清）</h2>
-<p style="color:var(--muted);font-size:13.6px;margin:0 0 9px">以下每一題<b>沒有標準答案</b>，請憑直覺勾在最接近您想法的位置。這幾題會幫助醫療人員了解您真正在意什麼。<span class="tag tagMe">由您自己填寫</span></p>
+<h2 class="step">步驟二、您選擇醫療方式會在意的項目有什麼？在意的程度為何？</h2>
+<div class="card">
+<p style="margin:0"><b>圈選範例說明</b>　在決定要不要使用 CGRP 標靶藥時，假若您在意「<b>頭痛天數能減少</b>」勝過「<b>要花這筆錢</b>」，請在偏向<b>左邊那句話</b>這半邊的框框中，依照在意的程度圈選數字，<b>數字越大代表在意的程度越高</b>。兩邊都差不多重要，就圈中間的 <b>0</b>。</p>
+</div>
+<div class="scroll"><table class="bal">
+<thead><tr>
+ <th style="width:31%">接受〔選項 A〕使用的理由</th>
+ <th colspan="3">比較接近左邊</th><th>一樣</th><th colspan="3">比較接近右邊</th>
+ <th style="width:31%">〔選項 D〕不使用的理由</th>
+</tr></thead>
+<tbody id="balBody"></tbody>
+</table></div>
+<p style="margin:5px 0 0;color:var(--muted);font-size:12.6px"><span class="tag tagMe">由您自己填寫</span>　這五對沒有標準答案，是要幫助醫療人員了解您真正在意什麼。</p>
 
+<p class="pg">第 6 頁／共 8 頁</p>
+
+<h2 class="step">步驟三、對於上面所提供的資訊，您是否已經了解呢？</h2>
 <div class="card">
-<div class="vs"><div class="l"><b>1.</b> 我很希望頭痛天數能減少，<b>願意接受打針</b></div>
- <div class="scale" data-q="q1"></div>
- <div class="r">我<b>很怕打針</b>，寧可用吃的</div></div>
-</div>
-<div class="card">
-<div class="vs"><div class="l"><b>2.</b> 100 人裡有 <b>39 人</b>會明顯改善，<b>這個機會我願意試</b></div>
- <div class="scale" data-q="q2"></div>
- <div class="r">100 人裡有 <b>61 人</b>沒有明顯改善，<br>這個機會<b>我沒辦法接受</b></div></div>
-</div>
-<div class="card">
-<div class="vs"><div class="l"><b>3.</b> 我最在意<b>頭痛天數能減少</b>，其他不舒服我可以忍</div>
- <div class="scale" data-q="q3"></div>
- <div class="r">我最在意<b>會不會有不舒服</b><br>（例如便祕、血壓、想睡）</div></div>
-</div>
-<div class="card">
-<div class="vs"><div class="l"><b>4.</b> 先花 3 個月的錢試試看，<b>這筆錢我出得起</b></div>
- <div class="scale" data-q="q4"></div>
- <div class="r">3 個月要先花這筆錢、<b>而且不保證有效</b><br>—— 對我或我的家庭<b>負擔太重</b></div></div>
-</div>
-<div class="card">
-<div class="vs"><div class="l"><b>5.</b> 我願意<b>同時</b>調整生活作息、減少止痛藥天數</div>
- <div class="scale" data-q="q5"></div>
- <div class="r">我<b>暫時沒有餘力</b>做這些改變</div></div>
+<div id="quiz"></div>
+<p style="margin:10px 0 0"><b>以上若有任何一項回答「不對」或「不確定」，請洽詢您的醫療人員再次說明。</b></p>
 </div>
 
-<p class="pg">第 6 頁／共 7 頁</p>
-
-<h2>十二、我們先講好「停損點」</h2>
-<div class="card teal">
-<p style="margin:0 0 6px"><b>為什麼要事先講好？</b>為了讓您不用一直懸著。<b>有效就繼續，沒效就換方向</b> —— 這是我們一起做的決定，不是您一個人要扛的責任。因為這類藥要自費，講好停損點在金錢上也是一種保護。</p>
-<p style="margin:0 0 6px">您這次要先準備的，是<b>這 3 個月的金額</b>，<b>不是一輩子的費用</b>。</p>
-<p style="margin:0"><b>用滿 3 個月</b>，如果沒有達到我們一起說好的目標，就停下來換方向，<b>不會讓您一直付錢卻看不到效果</b>。</p>
-</div>
+<h2 class="step">步驟四、您現在確認好醫療方式了嗎？</h2>
 <div class="card">
-<p style="margin:0 0 6px"><b>我們約定的評估時間點與目標</b>　<span class="tag tagDoc">與醫療人員一起填</span></p>
-<p style="margin:0 0 5px">評估時間：<input type="text" placeholder="例如：開始用藥後滿 3 個月，回診日期＿＿＿" data-s></p>
-<p style="margin:0">達到什麼算有效：<input type="text" placeholder="例如：每月偏頭痛天數從＿＿天降到＿＿天以下，或 MIDAS 明顯改善" data-s></p>
+<div id="confirm"></div>
 </div>
-
-<h2>十三、我的決定</h2>
-<div class="card">
-<p style="margin:0 0 7px"><b>看完以上資訊，我目前的想法是：</b>　<span class="tag tagMe">由您自己填寫</span></p>
+<div class="card green">
+<p style="margin:0 0 7px"><b>看完以上資訊，我的選擇是：</b>　<span class="tag tagMe">由您自己填寫</span></p>
 <p style="margin:0 0 5px">
-<label class="opt"><input type="radio" name="dec" value="a" data-s>A. 想開始用 CGRP 標靶藥</label>
-<label class="opt"><input type="radio" name="dec" value="b" data-s>B. 想再換一種口服預防藥</label></p>
-<p style="margin:0 0 5px">
+<label class="opt"><input type="radio" name="dec" value="a" data-s>A. 使用 CGRP 標靶藥</label>
+<label class="opt"><input type="radio" name="dec" value="b" data-s>B. 再換一種傳統口服預防藥</label>
 <label class="opt"><input type="radio" name="dec" value="c" data-s>C. 先做非藥物與生活調整</label>
-<label class="opt"><input type="radio" name="dec" value="d" data-s>D. 維持現狀，暫時不改</label>
-<label class="opt"><input type="radio" name="dec" value="e" data-s>E. 還沒決定，想再想想</label></p>
+<label class="opt"><input type="radio" name="dec" value="d" data-s>D. 維持現狀，暫時不改</label></p>
 <p style="margin:9px 0 5px"><b>如果選 A，我想用：</b>
 <label class="opt"><input type="radio" name="drug" value="emg" data-s>恩疼停（每月打針）</label>
-<label class="opt"><input type="radio" name="drug" value="ajo" data-s>艾久維（可每 3 個月打一次）</label></p>
-<p style="margin:0 0 9px">
+<label class="opt"><input type="radio" name="drug" value="ajo" data-s>艾久維（可每 3 個月打一次）</label>
 <label class="opt"><input type="radio" name="drug" value="nur" data-s>紐舒泰（隔日口服）</label>
 <label class="opt"><input type="radio" name="drug" value="aqu" data-s>艾妥達（每日口服）</label>
 <label class="opt"><input type="radio" name="drug" value="und" data-s>還沒決定</label></p>
+<p style="margin:11px 0 5px"><b>或者 ——</b></p>
+<p style="margin:0 0 5px"><label class="opt"><input type="radio" name="dec" value="x1" data-s><b>我目前還無法做決定</b>，因為我還需要更多資訊</label></p>
+<p style="margin:0 0 9px"><label class="opt"><input type="radio" name="dec" value="x2" data-s><b>我目前還無法做決定</b>，因為我想先和家人討論</label></p>
 <p style="margin:0 0 5px"><b>我還想問醫療人員的問題：</b></p>
 <textarea placeholder="想到什麼就寫什麼，沒有問題不好意思問。" data-s></textarea>
+</div>
+
+<h2>我們先講好「停損點」</h2>
+<div class="card teal">
+<p style="margin:0 0 6px"><b>為什麼要事先講好？</b>為了讓您不用一直懸著。<b>有效就繼續，沒效就換方向</b> —— 這是我們一起做的決定，不是您一個人要扛的責任。因為這類藥要自費，講好停損點在金錢上也是一種保護。</p>
+<p style="margin:0 0 6px">您這次要先準備的，是<b>這 3 個月的金額</b>，<b>不是一輩子的費用</b>。</p>
+<p style="margin:0 0 8px"><b>用滿 3 個月</b>，如果沒有達到我們一起說好的目標，就停下來換方向，<b>不會讓您一直付錢卻看不到效果</b>。</p>
+<p style="margin:0 0 5px">評估時間：<input type="text" placeholder="例如：開始用藥後滿 3 個月，回診日期＿＿＿" data-s></p>
+<p style="margin:0">達到什麼算有效：<input type="text" placeholder="例如：每月偏頭痛天數從＿＿天降到＿＿天以下，或 MIDAS 明顯改善" data-s></p>
 </div>
 
 <div class="card amber">
 <p style="margin:0"><b>這張表不是同意書，也不是最終決定。</b>您隨時可以改變想法。填完之後請按上面的「列印／存成 PDF」印出來，帶去門診和醫療人員一起討論。</p>
 </div>
 
-<p class="pg">第 7 頁／共 7 頁</p>
+<p class="pg">第 7 頁／共 8 頁</p>
+
+<h2>【更多資源】</h2>
+<div class="card">
+<ul style="margin:0">
+<li><b>台灣頭痛學會</b> —— 偏頭痛衛教資訊與專科醫師名單</li>
+<li><b>台灣神經學學會</b> —— 神經科疾病衛教</li>
+<li><b>衛生福利部醫病共享決策平台</b> —— 其他疾病的決策輔助工具</li>
+<li><b>本院神經內科／頭痛門診</b> —— 頭痛日誌表單、注射衛教、費用諮詢，請洽門診護理站</li>
+</ul>
+<p style="margin:7px 0 0;color:var(--muted);font-size:12.8px">上列單位的網址與聯絡方式，請向門診醫療人員索取最新資訊。</p>
+</div>
+
+<h2>【參考文獻】</h2>
+<ol class="ref">
+<li>Khalili M, Haghdoost F, Sadeghirad B, et al. Effectiveness and tolerability of pharmacological prophylaxis in migraine patients with prior preventive treatment failure: a systematic review and network meta-analysis. <i>Cephalalgia</i>. 2026;46(4). doi:10.1177/03331024261441287</li>
+<li>Ferrari MD, Diener HC, Ning X, et al. Fremanezumab versus placebo for migraine prevention in patients with documented failure to up to four migraine preventive medication classes (FOCUS). <i>Lancet</i>. 2019;394:1030–1040. doi:10.1016/S0140-6736(19)31946-4</li>
+<li>Mulleners WM, Kim BK, Láinez MJA, et al. Safety and efficacy of galcanezumab in patients for whom previous migraine preventive medication from two to four categories had failed (CONQUER). <i>Lancet Neurol</i>. 2020;19:814–825. doi:10.1016/S1474-4422(20)30279-9</li>
+<li>Ashina M, Lanteri-Minet M, Pozo-Rosich P, et al. Safety and efficacy of eptinezumab for migraine prevention in patients with two-to-four previous preventive treatment failures (DELIVER). <i>Lancet Neurol</i>. 2022;21:597–607. doi:10.1016/S1474-4422(22)00185-5</li>
+<li>Kleine-Borgmann J, Schmidt K, Ludwig L, et al. Open-label placebos as adjunct for the preventive treatment of migraine: a randomized clinical trial. <i>JAMA Netw Open</i>. 2025;8(10):e2535739. doi:10.1001/jamanetworkopen.2025.35739</li>
+<li>Damen JAA, Hooft L, Bekkering GE, et al. Comparative effectiveness of pharmacologic treatments for prevention of episodic migraine. <i>Ann Intern Med</i>. 2025;178(3):366–381.</li>
+</ol>
+
+<p class="pg">第 8 頁／共 8 頁</p>
 
 <footer>
 <p style="margin:0 0 4px"><b>〈單位名稱〉醫病共享決策　病人決策輔助工具（PDA）</b>　偏頭痛預防治療　2026 年版</p>
@@ -363,25 +629,65 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 </div>
 
 <script>
-// 百人圖：12 深藍（本來就會改善）＋ 27 綠（因為用藥才多得到的）＋ 61 淺色
-(function(){
-  var g=document.getElementById('g100'), h='';
-  for(var i=0;i<100;i++){ h+='<i class="'+(i<12?'a':(i<39?'b':''))+'"></i>'; }
-  g.innerHTML=h;
-})();
+/* 百人圖已在 HTML 中預先展開，不由 JS 產生 —— 列印與停用 JS 時仍可顯示。 */
 
-// 價值觀量表 3-2-1-0-1-2-3
+/* ── 步驟二：雙向天平 3-2-1-0-1-2-3 ─────────────────────────────── */
+var PAIRS=[
+ ['頭痛天數能減少，對我來說最重要','每個月自費一萬多塊，經濟負擔是我最大的顧慮'],
+ ['我願意每個月打一針，換取頭痛減少','我很怕打針，寧可用吃的、或乾脆不用'],
+ ['三種口服藥都因副作用停掉，我想試一個機轉不同的藥','我擔心新藥又出現我受不了的副作用'],
+ ['100 人裡有 39 人明顯改善，這個機會我願意試','100 人裡有 61 人沒有明顯改善，這個機會我沒辦法接受'],
+ ['我願意同時調整作息、減少止痛藥天數','我目前的工作與生活步調，暫時沒有餘力做這些改變']
+];
 (function(){
-  var L=['3','2','1','0','1','2','3'];
-  document.querySelectorAll('.scale[data-q]').forEach(function(sc){
-    var q=sc.dataset.q,h='';
-    for(var i=0;i<7;i++){
-      h+='<label><input type="radio" name="'+q+'" value="'+i+'" data-s>'+L[i]+'</label>';
+  var L=['3','2','1','0','1','2','3'], h='';
+  PAIRS.forEach(function(p,i){
+    h+='<tr><td>'+(i+1)+'. '+p[0]+'</td>';
+    for(var k=0;k<7;k++){
+      h+='<td class="n"><label><input type="radio" name="b'+i+'" value="'+k+'" data-s><br>'+L[k]+'</label></td>';
     }
-    sc.innerHTML=h;
+    h+='<td>'+p[1]+'</td></tr>';
   });
+  document.getElementById('balBody').innerHTML=h;
 })();
 
+/* ── 步驟三：知識檢核 4 題 ──────────────────────────────────────── */
+var QUIZ=[
+ '我每個月吃止痛藥的天數如果太多，頭痛反而會變得更頻繁，也更容易變成慢性偏頭痛。',
+ '使用 CGRP 標靶藥，每 100 人中大約有 39 人頭痛天數會減少一半以上；不使用則大約 12 人。',
+ '目前研究已經可以確定，CGRP 標靶藥不會增加因副作用而停藥的機會。',
+ '我必須先成功把止痛藥減下來，才可以開始使用預防藥。'
+];
+(function(){
+  var h='';
+  QUIZ.forEach(function(q,i){
+    h+='<p style="margin:0 0 7px">'+(i+1)+'. '+q+'<br>'+
+       '<label class="opt"><input type="radio" name="q'+i+'" value="y" data-s>對</label>'+
+       '<label class="opt"><input type="radio" name="q'+i+'" value="n" data-s>不對</label>'+
+       '<label class="opt"><input type="radio" name="q'+i+'" value="u" data-s>不確定</label></p>';
+  });
+  document.getElementById('quiz').innerHTML=h;
+})();
+
+/* ── 步驟四：決策確認 4 題 ──────────────────────────────────────── */
+var CONF=[
+ '我已經清楚知道使用 CGRP 標靶藥的好處與可能的壞處。',
+ '我已經清楚知道「不使用」這個選項的好處與風險。',
+ '我已經和醫療人員討論過費用，以及 3 個月的停損點。',
+ '我覺得自己已經有足夠的資訊，可以做這個決定。'
+];
+(function(){
+  var h='';
+  CONF.forEach(function(q,i){
+    h+='<p style="margin:0 0 7px">'+(i+1)+'. '+q+'<br>'+
+       '<label class="opt"><input type="radio" name="c'+i+'" value="y" data-s>是</label>'+
+       '<label class="opt"><input type="radio" name="c'+i+'" value="n" data-s>否</label>'+
+       '<label class="opt"><input type="radio" name="c'+i+'" value="u" data-s>不確定</label></p>';
+  });
+  document.getElementById('confirm').innerHTML=h;
+})();
+
+/* ── 儲存（僅本機） ─────────────────────────────────────────────── */
 var KEY='pda-migraine-2026';
 function nodes(){ return Array.prototype.slice.call(document.querySelectorAll('[data-s]')); }
 function idOf(el,i){ return el.name? el.name+'::'+el.value : 'i'+i; }
@@ -413,8 +719,7 @@ function clr(){
   save();
 }
 function tog(){
-  var r=document.documentElement;
-  var cur=r.getAttribute('data-theme');
+  var r=document.documentElement, cur=r.getAttribute('data-theme');
   var dark = cur? cur==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;
   r.setAttribute('data-theme', dark?'light':'dark');
   try{ localStorage.setItem(KEY+'-theme', dark?'light':'dark'); }catch(e){}
